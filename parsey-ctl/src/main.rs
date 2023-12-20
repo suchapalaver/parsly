@@ -3,9 +3,10 @@ pub mod message {
 }
 
 use message::message_service_client::MessageServiceClient;
-use message::TextRequest;
-use pdf_extract::extract_text;
+use message::BinaryRequest;
 use tonic::{transport::Endpoint, Request};
+
+use std::fs::read;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -13,18 +14,15 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     
     let mut client = MessageServiceClient::connect(endpoint).await?;
 
-    let pdf_text = extract_text("file.pdf")?;
+    let pdf_bytes = read("file.pdf")?;
 
-    println!("PDF Text: {}", pdf_text);
-    println!();
-
-    let request = Request::new(TextRequest {
-        text_data: pdf_text,
+    let request = Request::new(BinaryRequest {
+        pdf_bytes,
     });
 
     let response = client.process_text(request).await?.into_inner();
 
-    println!("'parsey' via OpenAI: {}", response.processed_text);
+    println!("'parsey' via OpenAI: {}", response.processed_content);
     println!();
 
     Ok(())
