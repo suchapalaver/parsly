@@ -50,8 +50,8 @@ This command builds the Docker image for the Parsey app.
 make run
 ```
 
-This command starts the Docker container, and your Parsey app will be
-accessible at [http://localhost:4000](http://localhost:4000) in your browser.
+This command starts the Docker container, and your Parsey app's gRPC service
+will be accessible at [http://localhost:50051](http://localhost:50051).
 
 #### Clean up:
 
@@ -76,7 +76,7 @@ docker build -t parsey-image .
 #### Run the Docker container:
 
 ```terminal
-docker run -p 4000:80 --env-file .env parsey-image
+docker run -p 50051:50051 --env-file .env parsey-image
 ```
 
 #### Clean up:
