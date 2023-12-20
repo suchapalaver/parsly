@@ -10,11 +10,15 @@ class MessageServiceServicer(message_pb2_grpc.MessageServiceServicer):
         client = OpenAI()
         stream = client.chat.completions.create(
             model="gpt-4",
-            messages=[{"role": "user", "content": "Say this is a test"}],
+            messages=[{"role": "user", "content": text_data}],
             stream=True,
         )
+
+        response_content = ""
         for chunk in stream:
-            print(chunk.choices[0].delta.content or "", end="")
+            response_content += chunk.choices[0].delta.content or ""
+
+        return message_pb2.TextResponse(processed_text=response_content)
 
 def serve():
     print("Starting server. Listening on port 50051.")
