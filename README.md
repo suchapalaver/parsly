@@ -33,8 +33,9 @@ local machine for development and testing purposes.
 
 - Docker
 - Make (optional, but recommended for using the Makefile)
+- [Rust and Cargo](https://www.rust-lang.org/tools/install) (for running the `parsey-ctl` Rust client)
 
-### Building and Running the Docker Container
+### Building and Running the Docker Container (`parsey` App)
 
 #### Build the Docker image:
 
@@ -86,3 +87,24 @@ docker stop $$(docker ps -aq --filter ancestor=parsey-image) || true
 docker rm $$(docker ps -aq --filter ancestor=parsey-image) || true
 docker rmi parsey-image || true
 ```
+
+## Running the Rust Client (`parsey-ctl`)
+
+### Navigate to parsey-ctl directory:
+
+```bash
+cd parsey-ctl
+```
+
+### Replace the Test PDF:
+
+Replace the `file.pdf` in the `parsey-ctl` directory with your desired PDF.
+
+### Build and Run the Rust Client:
+
+```bash
+cargo run
+```
+
+This command compiles and runs the `parsey-ctl` Rust client, sending a
+request to the `parsey` app's gRPC service.
