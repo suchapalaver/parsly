@@ -15,9 +15,13 @@ COPY requirements.txt .
 RUN pip install --upgrade pip && \
     pip install -r requirements.txt
 
+COPY message.proto .
+RUN python3 -m grpc_tools.protoc -I . --python_out=. --grpc_python_out=. message.proto
+
 FROM python:3.9-slim
 
 COPY --from=builder /opt/venv /opt/venv
+COPY --from=builder /app /app
 
 WORKDIR /app
 
@@ -27,6 +31,6 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 ENV OPENAI_API_KEY_FILE=.env
 
-EXPOSE 80
+EXPOSE 50051
 
 CMD ["python", "parsey.py"]

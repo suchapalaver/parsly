@@ -4,7 +4,7 @@ build:
 	docker build -t $(IMAGE_NAME) .
 
 run:
-	docker run -p 4000:80 --env-file .env $(IMAGE_NAME)
+	docker run -p 50051:50051 --env-file .env $(IMAGE_NAME)
 
 clean:
 	docker stop $$(docker ps -aq --filter ancestor=$(IMAGE_NAME)) || true
