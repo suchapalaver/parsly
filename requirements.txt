@@ -1,1 +1,4 @@
-openai==1.5.0
+grpcio
+grpcio-tools
+openai
+protobuf
