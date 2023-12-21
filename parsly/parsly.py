@@ -1,11 +1,15 @@
 import grpc
+import logging
 import message_pb2
 import message_pb2_grpc
 import os
 import PyPDF2
-from concurrent.futures import ThreadPoolExecutor  # Import ThreadPoolExecutor from concurrent.futures
+import sys
+from concurrent.futures import ThreadPoolExecutor
 from io import BytesIO
 from llama_index import VectorStoreIndex, SimpleDirectoryReader
+
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 class Utils:
     @staticmethod
@@ -31,13 +35,17 @@ class Utils:
 
 class MessageServiceServicer(message_pb2_grpc.MessageServiceServicer):
     def ProcessText(self, request, context):
+        logging.info("Received request from gRPC client ...")
+        logging.info("Creating PDF file to upload to agent ...")
         pdf_bytes = request.pdf_bytes
         Utils.create_pdf_from_bytes(pdf_bytes)
 
+        logging.info("Loading PDF file into LlamaIndex ...")
         documents = SimpleDirectoryReader("data").load_data()
         index = VectorStoreIndex.from_documents(documents)
 
         query_engine = index.as_query_engine()
+        logging.info("Issuing query to OpenAI ...")
         response = query_engine.query("""
                                       If you find tables in the PDF file, 
                                       please parse them and return the data as a JSON object. 
@@ -45,10 +53,11 @@ class MessageServiceServicer(message_pb2_grpc.MessageServiceServicer):
                                       """
                                     )
         
+        logging.info("Returning response to gRPC client ...")
         return message_pb2.TextResponse(processed_content=response.response)
 
 def serve():
-    print("Starting 'parsly' server. Listening on port 50051.")
+    logging.info("Starting 'parsly' server. Listening on port 50051.")
     server = grpc.server(ThreadPoolExecutor(max_workers=10))
     message_pb2_grpc.add_MessageServiceServicer_to_server(
         MessageServiceServicer(), server
