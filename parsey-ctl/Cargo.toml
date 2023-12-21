@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+clap = "4.4.11"
 prost = "0.12.3"
 serde_json = "1.0.108"
 tokio = { version = "1.27.0", features = ["full"] }

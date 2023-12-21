@@ -99,9 +99,11 @@ docker rmi parsey-image || true
 cd parsey-ctl
 ```
 
-### Replace the Test PDF:
+### See the CLI Help Menu
 
-Replace the `file.pdf` in the `parsey-ctl` directory with your desired PDF.
+```bash
+cargo run -- --help
+```
 
 ### Build and Run the Rust Client:
 
