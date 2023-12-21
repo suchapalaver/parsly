@@ -114,5 +114,5 @@ cargo run
 This command compiles and runs the `parsey-ctl` Rust client, sending a
 request to the `parsey` app's gRPC service.
 
-By default, it listens for the `parsey` gRPC service on port `50051`,
-and uses data from the `table.pdf` test file.
+By default, `parsey-ctl` listens for the `parsey` gRPC service on port
+`50051`, and uses data from the `table.pdf` test file.
