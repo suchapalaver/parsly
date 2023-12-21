@@ -1,5 +1,6 @@
 grpcio
 grpcio-tools
-openai
+llama-index
 protobuf
+pypdf
 PyPDF2
