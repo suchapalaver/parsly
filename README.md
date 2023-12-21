@@ -57,6 +57,12 @@ make run
 This command starts the Docker container, and your Parsey app's gRPC service
 will be accessible at [http://localhost:50051](http://localhost:50051).
 
+If things work, you should see this in your terminal:
+
+```terminal
+Starting 'parsey' server. Listening on port 50051.
+```
+
 #### Clean up:
 
 ```terminal
@@ -80,7 +86,7 @@ docker build -t parsey-image .
 #### Run the Docker container:
 
 ```terminal
-docker run -p 50051:50051 --env-file .env parsey-image
+docker run -it -p 50051:50051 --env-file .env parsey-image
 ```
 
 #### Clean up:
@@ -116,3 +122,51 @@ request to the `parsey` app's gRPC service.
 
 By default, `parsey-ctl` listens for the `parsey` gRPC service on port
 `50051`, and uses data from the `table.pdf` test file.
+
+Using the default `table.pdf` file, you should output like this:
+
+```terminal
+Received from 'parsey' via OpenAI:
+
+{
+  "table": [
+    {
+      "Ballots Completed": 1,
+      "Ballots Incomplete/Terminated": 4,
+      "Category": "Completed",
+      "Disability": "Blind",
+      "Participants": 5,
+      "Results Accuracy": "34.5%, n=1",
+      "Time to complete": "1199 sec, n=1"
+    },
+    {
+      "Ballots Completed": 2,
+      "Ballots Incomplete/Terminated": 3,
+      "Category": "Completed",
+      "Disability": "Low Vision",
+      "Participants": 5,
+      "Results Accuracy": "98.3% n=2 (97.7%, n=3)",
+      "Time to complete": "1716 sec, n=3 (1934 sec, n=2)"
+    },
+    {
+      "Ballots Completed": 4,
+      "Ballots Incomplete/Terminated": 1,
+      "Category": "Completed",
+      "Disability": "Dexterity",
+      "Participants": 5,
+      "Results Accuracy": "98.3%, n=4",
+      "Time to complete": "1672.1 sec, n=4"
+    },
+    {
+      "Ballots Completed": 3,
+      "Ballots Incomplete/Terminated": 0,
+      "Category": "Completed",
+      "Disability": "Mobility",
+      "Participants": 3,
+      "Results Accuracy": "95.4%, n=3",
+      "Time to complete": "1416 sec, n=3"
+    }
+  ]
+}
+
+```
