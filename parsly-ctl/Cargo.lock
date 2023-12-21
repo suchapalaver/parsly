@@ -625,7 +625,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "parsey-ctl"
+name = "parsly-ctl"
 version = "0.1.0"
 dependencies = [
  "clap",

@@ -1,4 +1,4 @@
-IMAGE_NAME = parsey-image
+IMAGE_NAME = parsly-image
 
 build:
 	docker build -t $(IMAGE_NAME) .

@@ -1,7 +1,12 @@
-# parsey
+# parsly
 
-Parsey is a simple Python application leveraging natural language processing
-functionalities. With built-in Docker support and a Makefile for convenient
+Parsly is a simple Python application leveraging natural language processing
+functionalities to extract tabular data from a PDF to JSON. It has two components:
+
+- `parsly` - a gRPC messaging service and OpenAI client written in Python
+- `parsly-ctl` - client written in Rust for loading data to Parsly via 
+
+With built-in Docker support and a Makefile for convenient
 development and deployment, the focus of the project is to serve as a proof of
 concept for deploying AI agents on orchestration infrastructure such as
 Kubernetes, with the ability to receive data to the service and respond via
@@ -12,8 +17,8 @@ Kubernetes, with the ability to receive data to the service and respond via
 ### Clone the Repository:
 
 ```terminal
-git clone https://github.com/your-username/parsey.git
-cd parsey
+git clone https://github.com/your-username/parsly.git
+cd parsly
 ```
 
 ### Set Up OpenAI API Key:
@@ -36,9 +41,9 @@ local machine for development and testing purposes.
 
 - Docker
 - Make (optional, but recommended for using the Makefile)
-- [Rust and Cargo](https://www.rust-lang.org/tools/install) (for running the `parsey-ctl` Rust client)
+- [Rust and Cargo](https://www.rust-lang.org/tools/install) (for running the `parsly-ctl` Rust client)
 
-### Building and Running the Docker Container (`parsey` App)
+### Building and Running the Docker Container (`parsly` App)
 
 #### Build the Docker image:
 
@@ -46,7 +51,7 @@ local machine for development and testing purposes.
 make build
 ```
 
-This command builds the Docker image for the Parsey app.
+This command builds the Docker image for the Parsly app.
 
 #### Run the Docker container:
 
@@ -54,13 +59,13 @@ This command builds the Docker image for the Parsey app.
 make run
 ```
 
-This command starts the Docker container, and your Parsey app's gRPC service
+This command starts the Docker container, and your Parsly app's gRPC service
 will be accessible at [http://localhost:50051](http://localhost:50051).
 
 If things work, you should see this in your terminal:
 
 ```terminal
-Starting 'parsey' server. Listening on port 50051.
+Starting 'parsly' server. Listening on port 50051.
 ```
 
 #### Clean up:
@@ -80,29 +85,29 @@ commands:
 #### Build the Docker image:
 
 ```terminal
-docker build -t parsey-image .
+docker build -t parsly-image .
 ```
 
 #### Run the Docker container:
 
 ```terminal
-docker run -it -p 50051:50051 --env-file .env parsey-image
+docker run -it -p 50051:50051 --env-file .env parsly-image
 ```
 
 #### Clean up:
 
 ```terminal
-docker stop $$(docker ps -aq --filter ancestor=parsey-image) || true
-docker rm $$(docker ps -aq --filter ancestor=parsey-image) || true
-docker rmi parsey-image || true
+docker stop $$(docker ps -aq --filter ancestor=parsly-image) || true
+docker rm $$(docker ps -aq --filter ancestor=parsly-image) || true
+docker rmi parsly-image || true
 ```
 
-## Running the Rust Client (`parsey-ctl`)
+## Running the Rust Client (`parsly-ctl`)
 
-### Navigate to parsey-ctl directory:
+### Navigate to parsly-ctl directory:
 
 ```bash
-cd parsey-ctl
+cd parsly-ctl
 ```
 
 ### See the CLI Help Menu
@@ -117,16 +122,16 @@ cargo run -- --help
 cargo run
 ```
 
-This command compiles and runs the `parsey-ctl` Rust client, sending a
-request to the `parsey` app's gRPC service.
+This command compiles and runs the `parsly-ctl` Rust client, sending a
+request to the `parsly` app's gRPC service.
 
-By default, `parsey-ctl` listens for the `parsey` gRPC service on port
+By default, `parsly-ctl` listens for the `parsly` gRPC service on port
 `50051`, and uses data from the `table.pdf` test file.
 
 Using the default `table.pdf` file, you should output like this:
 
 ```terminal
-Received from 'parsey' via OpenAI:
+Received from 'parsly' via OpenAI:
 
 {
   "table": [

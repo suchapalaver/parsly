@@ -26,14 +26,14 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let request = Request::new(BinaryRequest { pdf_bytes });
 
     println!();
-    println!("Sending request to 'parsey' ...");
+    println!("Sending request to 'parsly' ...");
 
     let response = client.process_text(request).await?.into_inner();
 
     let json_value: serde_json::Value = serde_json::from_str(&response.processed_content)?;
 
     println!();
-    println!("Received from 'parsey' via OpenAI:");
+    println!("Received from 'parsly' via OpenAI:");
     println!();
     println!("{}", serde_json::to_string_pretty(&json_value).unwrap());
 

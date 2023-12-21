@@ -33,4 +33,4 @@ ENV OPENAI_API_KEY_FILE=.env
 
 EXPOSE 50051
 
-CMD ["python", "parsey.py"]
+CMD ["python", "parsly.py"]

@@ -1,10 +1,10 @@
-# parsey
+# parsly
 
 ## Environment variables
-parsey/.env
+parsly/.env
 
 ## Python
-parsey/__pycache__/
+parsly/__pycache__/
 *.pyc
 *.pyo
 *.pyd
@@ -16,8 +16,8 @@ parsey/__pycache__/
 *.py~
 
 ## venv
-parsey/.venv/
-parsey/venv/
+parsly/.venv/
+parsly/venv/
 
-# parsey-ctl
-parsey-ctl/target/
+# parsly-ctl
+parsly-ctl/target/

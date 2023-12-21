@@ -48,7 +48,7 @@ class MessageServiceServicer(message_pb2_grpc.MessageServiceServicer):
         return message_pb2.TextResponse(processed_content=response.response)
 
 def serve():
-    print("Starting 'parsey' server. Listening on port 50051.")
+    print("Starting 'parsly' server. Listening on port 50051.")
     server = grpc.server(ThreadPoolExecutor(max_workers=10))
     message_pb2_grpc.add_MessageServiceServicer_to_server(
         MessageServiceServicer(), server
