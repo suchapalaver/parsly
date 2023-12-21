@@ -2,6 +2,7 @@ import grpc
 import json
 import message_pb2
 import message_pb2_grpc
+import os
 import PyPDF2
 import time
 from concurrent.futures import ThreadPoolExecutor  # Import ThreadPoolExecutor from concurrent.futures
@@ -18,12 +19,20 @@ class Utils:
         pdf_writer = PyPDF2.PdfWriter()
         buffer = BytesIO(pdf_bytes)
         pdf_reader = PyPDF2.PdfReader(buffer)
+
         for page_num in range(len(pdf_reader.pages)):
             pdf_writer.add_page(pdf_reader.pages[page_num])
+        
         new_pdf_buffer = BytesIO()
         pdf_writer.write(new_pdf_buffer)
         new_pdf_buffer.seek(0)
-        with open('file.pdf', 'wb') as new_pdf_file:
+
+        data_folder = 'data'
+        file_path = os.path.join(data_folder, 'file.pdf')
+
+        os.makedirs(data_folder, exist_ok=True)
+
+        with open(file_path, 'wb') as new_pdf_file:
             new_pdf_file.write(new_pdf_buffer.read())
 
 class MessageServiceServicer(message_pb2_grpc.MessageServiceServicer):
@@ -69,7 +78,7 @@ class MessageServiceServicer(message_pb2_grpc.MessageServiceServicer):
     
     def create_assistant_file(self, client):
         file = client.files.create(
-            file=open("file.pdf", "rb"),
+            file=open("./data/file.pdf", "rb"),
             purpose='assistants'
         )
         return file
