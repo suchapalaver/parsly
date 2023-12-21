@@ -21,3 +21,6 @@ parsly/venv/
 
 # parsly-ctl
 parsly-ctl/target/
+
+## test report data
+parsly-ctl/BLFWD-Summit-Report.pdf
