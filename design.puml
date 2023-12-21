@@ -1,0 +1,19 @@
+@startuml design
+
+!theme bluegray
+skinparam classFontColor darkSlateGray
+skinparam interface {
+  BackgroundColor white
+  BorderColor black
+}
+
+package "parsly" {
+  [parsly-ctl:\nCLI Rust client] <-up-> [parsly:\nPython gRPC messaging service and OpenAI client] : PDF data\nover gRPC
+}
+interface "\t\t\tOpenAI\n\t\t\tvia\n\t\t\tLlamaIndex" as OpenAI
+[parsly:\nPython gRPC messaging service and OpenAI client] <--right--> OpenAI
+
+interface "\t\t\tPDF with\n\t\t\ttabular data" as PDF
+[parsly-ctl:\nCLI Rust client] <--right-- PDF
+
+@enduml
