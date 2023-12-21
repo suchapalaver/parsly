@@ -1,24 +1,14 @@
 # parsly
 
-Parsly is a simple Python application leveraging natural language processing
-functionalities to extract tabular data from a PDF and convert it to JSON. 
-
-The project comprises two components:
-
-- `parsly`: A gRPC messaging service and OpenAI client implemented in Python.
-- `parsly-ctl`: A Rust client designed for loading data into `parsly` over gRPC.
-
-With built-in Docker support and a Makefile for streamlined development and
-deployment, the project is primarily aimed at showcasing a proof of concept
-for deploying AI agents on orchestration infrastructure like Kubernetes.
-
 Parsly is a simple solution for extracting tabular data from PDFs and
 converting it to JSON using natural language processing. 
 
 The project consists of two primary components:
 
-- `parsly`: A gRPC messaging service and OpenAI client implemented in Python.
-- `parsly-ctl`: A Rust client designed for loading data into `parsly` over [gRPC](https://grpc.io/).
+- `parsly`: A [gRPC](https://grpc.io/) messaging service and OpenAI client implemented in Python.
+- `parsly-ctl`: A Rust client designed for loading data into `parsly` over gRPC.
+
+![`parsly` design diagram](design.svg)
 
 Equipped with built-in Docker support and a Makefile for streamlined development
 and deployment, Parsly serves as a proof of concept for deploying AI agents on
