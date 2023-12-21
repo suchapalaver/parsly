@@ -1,16 +1,28 @@
 # parsly
 
 Parsly is a simple Python application leveraging natural language processing
-functionalities to extract tabular data from a PDF to JSON. It has two components:
+functionalities to extract tabular data from a PDF and convert it to JSON. 
 
-- `parsly` - a gRPC messaging service and OpenAI client written in Python
-- `parsly-ctl` - client written in Rust for loading data to Parsly via 
+The project comprises two components:
 
-With built-in Docker support and a Makefile for convenient
-development and deployment, the focus of the project is to serve as a proof of
-concept for deploying AI agents on orchestration infrastructure such as
-Kubernetes, with the ability to receive data to the service and respond via
-[gRPC](https://grpc.io/).
+- `parsly`: A gRPC messaging service and OpenAI client implemented in Python.
+- `parsly-ctl`: A Rust client designed for loading data into `parsly` over gRPC.
+
+With built-in Docker support and a Makefile for streamlined development and
+deployment, the project is primarily aimed at showcasing a proof of concept
+for deploying AI agents on orchestration infrastructure like Kubernetes.
+
+Parsly is a simple solution for extracting tabular data from PDFs and
+converting it to JSON using natural language processing. 
+
+The project consists of two primary components:
+
+- `parsly`: A gRPC messaging service and OpenAI client implemented in Python.
+- `parsly-ctl`: A Rust client designed for loading data into `parsly` over [gRPC](https://grpc.io/).
+
+Equipped with built-in Docker support and a Makefile for streamlined development
+and deployment, Parsly serves as a proof of concept for deploying AI agents on
+orchestration infrastructure, such as Kubernetes.
 
 ## Installation
 
@@ -24,7 +36,7 @@ cd parsly
 ### Set Up OpenAI API Key:
 
 - Obtain an API key from OpenAI.
-- Create a `.env` file in the project root:
+- Create a `.env` file in the project root, the same directory as this README:
 
 ```env
 OPENAI_API_KEY=your_openai_api_key_here
