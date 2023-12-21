@@ -1,8 +1,11 @@
 # parsey
 
-Parsey is a simple Python app using the OpenAI library for powerful natural
-language processing capabilities. It comes with Docker support and a Makefile
-for convenient development and deployment.
+Parsey is a simple Python application leveraging natural language processing
+functionalities. With built-in Docker support and a Makefile for convenient
+development and deployment, the focus of the project is to serve as a proof of
+concept for deploying AI agents on orchestration infrastructure such as
+Kubernetes, with the ability to receive data to the service and respond via
+[gRPC](https://grpc.io/).
 
 ## Installation
 
