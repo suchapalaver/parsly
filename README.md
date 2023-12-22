@@ -19,7 +19,7 @@ orchestration infrastructure, such as Kubernetes.
 ### Clone the Repository:
 
 ```terminal
-git clone https://github.com/your-username/parsly.git
+git clone https://github.com/balanced-livc/parsly.git
 cd parsly
 ```
 
