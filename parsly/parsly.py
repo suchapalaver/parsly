@@ -48,8 +48,11 @@ class MessageServiceServicer(message_pb2_grpc.MessageServiceServicer):
         logging.info("Issuing query to OpenAI ...")
         response = query_engine.query("""
                                       If you find tables in the PDF file, 
-                                      please parse them and return the data as a JSON object. 
-                                      Only return the JSON object as your response without writing anything else other than the JSON
+                                      please parse each table as a list of JSON objects.
+                                      Only return an array of JSON arrays, 
+                                      with each JSON array representing a table of data in the PDF, 
+                                      as your response without writing anything else other than the JSON.
+                                      Ensure that your response includes all tables in the PDF file.
                                       """
                                     )
         
